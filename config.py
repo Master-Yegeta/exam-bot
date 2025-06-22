@@ -1,0 +1,7 @@
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+TELEGRAM_BOT_TOKEN = "7967950722:AAHIaWRBu5gqgguPSWnD5ZmxIbfAJB1vCKw"
+BOT_CREATOR = "Anon_0x1"
