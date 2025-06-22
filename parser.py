@@ -100,6 +100,12 @@ def parse_questions(text: str):
                 choice_buffer = []
 
             answers = line.split(":")[1].strip().upper()
+
+            # If the answer is TRUE/FALSE/YES/NO, and the question isn't already a checkbox type
+            # (as checkbox items might legitimately have "True" or "False" as choice text),
+            # then we should ensure the question type is TRUE_FALSE.
+            if answers in ["TRUE", "FALSE", "YES", "NO"] and current["type"] != QuestionType.CHECKBOX:
+                current["type"] = QuestionType.TRUE_FALSE
             
             # Handle different answer formats
             if current["type"] == QuestionType.CHECKBOX:
