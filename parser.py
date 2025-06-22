@@ -117,8 +117,22 @@ def parse_questions(text: str):
                                 answer_letters.append(chr(65 + i))  # Convert to A, B, C, D
                                 break
                 current["correct_answers"] = answer_letters
+            elif current["type"] == QuestionType.TRUE_FALSE:
+                # For True/False, the answer is the text itself (e.g., "TRUE", "FALSE")
+                if answers.upper() in ["TRUE", "FALSE", "YES", "NO"]:
+                    # Normalize YES/NO to TRUE/FALSE for consistency if needed by Google Forms
+                    if answers.upper() == "YES":
+                        current["correct_text"] = "TRUE"
+                    elif answers.upper() == "NO":
+                        current["correct_text"] = "FALSE"
+                    else:
+                        current["correct_text"] = answers.upper()
+                else:
+                    # Or handle as an error/default if the value is unexpected
+                    # For now, let's assume it's one of the valid options.
+                    current["correct_text"] = answers.upper() # Fallback, might need validation
             else:
-                # Handle single answer (convert text to letter if needed)
+                # Handle single answer (convert text to letter if needed for MCQ, etc.)
                 if len(answers) == 1 and answers in "ABCD":
                     current["correct_letter"] = answers
                 else:
@@ -129,7 +143,7 @@ def parse_questions(text: str):
                             break
 
     # Save the last question if exists
-    if current and (current["choices"] or choice_buffer):
+    if current and (current["choices"] or current.get("correct_text") or choice_buffer):
         if choice_buffer:
             current["choices"] = format_choices('\n'.join(choice_buffer))
         questions.append(current)

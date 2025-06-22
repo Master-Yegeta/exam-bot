@@ -267,11 +267,6 @@ def main():
     try:
         app = ApplicationBuilder()\
             .token(config.TELEGRAM_BOT_TOKEN)\
-            .read_timeout(30)\
-            .write_timeout(30)\
-            .connect_timeout(30)\
-            .pool_timeout(30)\
-            .get_updates_read_timeout(42)\
             .build()
     except Exception as e:
         print(f"❌ Error initializing bot: {str(e)}")
@@ -301,8 +296,7 @@ def main():
     # Run the bot with automatic reconnection
     app.run_polling(
         allowed_updates=Update.ALL_TYPES,
-        drop_pending_updates=True,
-        close_loop=False
+        drop_pending_updates=True
     )
 
 if __name__ == "__main__":

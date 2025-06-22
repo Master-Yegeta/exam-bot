@@ -21,7 +21,7 @@ def generate_google_form_script(questions):
           item{idx}.createChoice("True"),
           item{idx}.createChoice("False")
       ])
-      .setCorrectAnswers([item{idx}.createAnswer("{q['correct_letter']}")]);
+      .setCorrectAnswers([item{idx}.createAnswer("{q['correct_text']}")]);
   \n'''
 
         elif q["type"] == QuestionType.SHORT_ANSWER:
