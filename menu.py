@@ -25,3 +25,20 @@ def format_menu_keyboard():
         [InlineKeyboardButton("⬅️ Back to Menu", callback_data='back')]
     ]
     return InlineKeyboardMarkup(keyboard)
+
+def form_creation_method_keyboard():
+    """Menu to choose form creation method"""
+    keyboard = [
+        [InlineKeyboardButton("🔗 Direct Google Form Link", callback_data='method_direct')],
+        [InlineKeyboardButton("📝 Google Apps Script (Recommended)", callback_data='method_script')],
+        [InlineKeyboardButton("⬅️ Back to Menu", callback_data='back')]
+    ]
+    return InlineKeyboardMarkup(keyboard)
+
+def success_menu_keyboard():
+    """Menu shown after successful form creation"""
+    keyboard = [
+        [InlineKeyboardButton("🏠 Back to Main Menu", callback_data='back')],
+        [InlineKeyboardButton("📝 Create Another Form", callback_data='back')]
+    ]
+    return InlineKeyboardMarkup(keyboard)

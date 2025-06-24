@@ -3,5 +3,5 @@ import os
 
 load_dotenv()
 
-TELEGRAM_BOT_TOKEN = "7967950722:AAHIaWRBu5gqgguPSWnD5ZmxIbfAJB1vCKw"
+TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
 BOT_CREATOR = "Anon_0x1"
